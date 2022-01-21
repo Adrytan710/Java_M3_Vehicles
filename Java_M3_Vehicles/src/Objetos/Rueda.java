@@ -1,4 +1,9 @@
 package Objetos;
+/**
+ * 
+ * @author JOAN
+ *
+ */
 
 public class Rueda {
 	
