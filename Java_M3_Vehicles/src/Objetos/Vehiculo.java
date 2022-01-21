@@ -1,5 +1,7 @@
 package Objetos;
 
+import java.util.ArrayList;
+
 /**
  * @author Adrián Rodriguez
  */
@@ -11,6 +13,8 @@ abstract public class Vehiculo {
 	protected String matricula;
 	protected String marca;
 	protected String color;
+	protected Titular titular;
+	protected ArrayList<Persona> conductor = new ArrayList<Persona>();
 	
 	//Constructor
 	
@@ -45,12 +49,22 @@ abstract public class Vehiculo {
 	public void setColor(String color) {
 		this.color = color;
 	}
-
-	//Método toString
 	
-	@Override
-	public String toString() {
-		return "Vehiculo [matricula=" + matricula + ", marca=" + marca + ", color=" + color + "]";
+	public Titular getTitular() {
+		return titular;
 	}
+
+	public void setTitular(Titular titular) {
+		this.titular = titular;
+	}
+
+	public ArrayList<Persona> getConductor() {
+		return conductor;
+	}
+
+	public void setConductor(ArrayList<Persona> conductor) {
+		this.conductor = conductor;
+	}
+	
 	
 }
