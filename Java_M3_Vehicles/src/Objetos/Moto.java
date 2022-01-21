@@ -1,7 +1,5 @@
 package Objetos;
 
-import java.util.Arrays;
-
 /**
  * @author Adrián Rodriguez
  */
