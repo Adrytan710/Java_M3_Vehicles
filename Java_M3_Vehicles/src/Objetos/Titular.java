@@ -40,12 +40,16 @@ public class Titular extends Conductor {
 			public void setGaraje(boolean garaje) {
 				this.garaje = garaje;
 			}
-
 			//Método toString
-			
+
 			@Override
 			public String toString() {
-				return "Titular [seguro=" + seguro + ", garaje=" + garaje + "]";
+				return "Titular [seguro=" + seguro + ", garaje=" + garaje + ", id=" + id + ", tipo_licencia="
+						+ tipo_licencia + ", nombre_completo=" + nombre_completo + ", fecha_caducidad="
+						+ fecha_caducidad + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fecha_nacimiento="
+						+ fecha_nacimiento + ", licencia=" + licencia + "]";
 			}
+
+						
 			
 }
