@@ -65,12 +65,6 @@ abstract public class Vehiculo {
 	public void setConductor(ArrayList<Persona> conductor) {
 		this.conductor = conductor;
 	}
-
-	//Método toString
-
-	@Override
-	public String toString() {
-		return "Vehiculo [matricula=" + matricula + ", marca=" + marca + ", color=" + color + "]";
-	}
+	
 	
 }

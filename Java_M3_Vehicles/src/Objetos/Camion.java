@@ -42,13 +42,15 @@ public class Camion extends Vehiculo {
 		public void setRuedasTraseras(Rueda[] ruedasTraseras) {
 			this.ruedasTraseras = ruedasTraseras;
 		}
-		
 		//Método toString
-		
+
+
 		@Override
 		public String toString() {
-			return "Coche [ruedasDelanteras=" + Arrays.toString(ruedasDelanteras) + ", ruedasTraseras="
-					+ Arrays.toString(ruedasTraseras) + ", matricula=" + matricula + ", marca=" + marca + ", color=" + color
-					+ "]";
+			return "Camion [ruedasDelanteras=" + Arrays.toString(ruedasDelanteras) + ", ruedasTraseras="
+					+ Arrays.toString(ruedasTraseras) + ", matricula=" + matricula + ", marca=" + marca + ", color="
+					+ color + ", titular=" + titular + ", conductor=" + conductor + "]";
 		}
+		
+		
 }

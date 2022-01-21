@@ -1,4 +1,5 @@
 package Main;
+import java.util.ArrayList;
 /**
  * @author JOAN
  */
@@ -12,8 +13,81 @@ public class MainApp {
 
 	public static void main(String[] args) {
 		
-		//Creamos Usuario
-		Titular titular = crearUsuario();
+		ArrayList<Persona> usuarios = new ArrayList<Persona>();
+		ArrayList<Persona> usuariosAux = new ArrayList<Persona>();
+		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
+		
+		int op;
+		//Menu general
+		do 
+		{
+			try 
+			{
+				op = Integer.parseInt(JOptionPane.showInputDialog("Menu (1/2/3): \n\n1. Crear Usuario  \n2. Crear Vehiculo \n3. Salir"));
+			} 
+			catch (Exception e) 
+			{
+				op = 0;
+			}
+			
+			switch (op) 
+			{
+				case 1:
+						menuCrearUsuario(usuarios, usuariosAux);
+					break;
+					
+				case 2:
+						menuCrearVehicles(vehiculos, usuariosAux);
+					break;
+					
+				case 3:
+						JOptionPane.showMessageDialog(null, "Hasta la proxima.");
+					break;
+	
+				default:
+					JOptionPane.showMessageDialog(null, "Opcion incorrecta.");
+					break;
+			}
+		} 
+		while (op != 3);
+		
+		System.out.println(vehiculos);
+
+	}
+
+	/************************************************************** FUNCIONES  **************************************************************************/
+	
+	
+	/**
+	 * Menu crear usuario
+	 * @param usuarios
+	 * @param usuariosAux
+	 */
+	public static void menuCrearUsuario(ArrayList<Persona> usuarios, ArrayList<Persona> usuariosAux) 
+	{
+		if(usuarios.size() < 1)
+		{
+			Titular titular = crearTitular();
+			
+			usuarios.add(titular);
+			usuariosAux.add(titular);
+		}
+		else
+		{
+			Conductor conductor = crearConductor();
+			
+			usuarios.add(conductor);
+			usuariosAux.add(conductor);
+		}
+	}
+
+	/**
+	 * Menu crear vehiculo
+	 * @param usuarios
+	 * @param usuariosAux
+	 */
+	public static void menuCrearVehicles(ArrayList<Vehiculo> vehiculos, ArrayList<Persona> usuariosAux) 
+	{
 		
 		//Pedimos al usuario si quiere crear coche o moto
 		String opcion;
@@ -21,12 +95,12 @@ public class MainApp {
 		do 
 		{
 			opcion = JOptionPane.showInputDialog("Escoge que vehiculo quieres introducir: \n\n- Coche \n- Moto \n- Camion");
-			if(!comprobarLicencia(opcion, titular))
+			if(!comprobarLicencia(opcion, (Titular)usuariosAux.get(0)))
 			{
 				JOptionPane.showMessageDialog(null, "La licencia no permite conducir este vehiculo");
 			}
 		} 
-		while (!comprobarLicencia(opcion, titular));
+		while (!comprobarLicencia(opcion, (Titular)usuariosAux.get(0)));
 
 		//Pedimos al usuario datos del vehiculo
 		String matricula;
@@ -40,8 +114,10 @@ public class MainApp {
 			}
 		}
 		while (!Pattern.matches("[0-9]{4}[a-zA-Z]{2,3}", matricula));
+		
 		String marca = JOptionPane.showInputDialog("Intoduce la marca del vehiculo.");
 		String color = JOptionPane.showInputDialog("Intoduce el color del vehiculo.");
+		ArrayList<Persona> conductores = new ArrayList<Persona>();
 		
 		switch (opcion) 
 		{
@@ -52,10 +128,15 @@ public class MainApp {
 					coche.setRuedasDelanteras(rellenarRuedasDelanteras());
 					coche.setRuedasTraseras(rellenarRuedasTraseras());
 					
-					comprobarConductor(titular, opcion);
+					coche.setTitular((Titular)usuariosAux.get(0));
 
-					System.out.println(titular);
-					System.out.println(coche);
+					comprobarConductor(usuariosAux, opcion);
+					
+					conductores.addAll(usuariosAux);
+					
+					coche.setConductor(conductores);
+					vehiculos.add(coche);
+
 				break;
 				
 			case "Moto":
@@ -64,11 +145,15 @@ public class MainApp {
 					moto.setRuedasDelantera(ruedaDelanteraMoto());
 					moto.setRuedasTrasera(ruedaTraseraMoto());
 					
+					moto.setTitular((Titular)usuariosAux.get(0));
 					
-					comprobarConductor(titular, opcion);
+					comprobarConductor(usuariosAux, opcion);
 					
-					System.out.println(titular);
-					System.out.println(moto);
+					conductores.addAll(usuariosAux);
+					
+					moto.setConductor(conductores);
+					vehiculos.add(moto);
+					
 				break;
 				
 			case "Camion":					
@@ -77,55 +162,74 @@ public class MainApp {
 					camion.setRuedasDelanteras(rellenarRuedasDelanteras());
 					camion.setRuedasTraseras(rellenarRuedasTraseras());
 					
-					comprobarConductor(titular, opcion);
+					camion.setTitular((Titular)usuariosAux.get(0));
 
-					System.out.println(titular);
-					System.out.println(camion);
+					comprobarConductor(usuariosAux, opcion);
+					
+					conductores.addAll(usuariosAux);
+					
+					camion.setConductor(conductores);
+					vehiculos.add(camion);
+
 				break;
 	
 			default:
 				JOptionPane.showMessageDialog(null, "La opcion no es valida");
 				break;
 		}
-
+		
+		usuariosAux.clear();
 	}
 	
-	/************************************************************** FUNCIONES 
-	 * @param opcion **************************************************************************/
 	
-	public static void comprobarConductor(Titular titular, String opcion)
+	/**
+	 * Funcion que comprueba si el titular es conductor
+	 * @param usuariosAux
+	 * @param opcion
+	 */
+	public static void comprobarConductor(ArrayList<Persona> usuariosAux, String opcion)
 	{
 		if(JOptionPane.showInputDialog("El titular sera el conductor? Si/No").equalsIgnoreCase("no"))
 		{
-			do 
+			if(usuariosAux.size() < 2)
 			{
-				titular = crearUsuario();
-				if(!comprobarLicencia(opcion, titular))
+				usuariosAux.clear();
+				Conductor conductor;
+				do 
 				{
-					JOptionPane.showMessageDialog(null, "La licencia no permite conducir este vehiculo");
-				}
-			} 
-			while (!comprobarLicencia(opcion, titular));
+					conductor = crearConductor();
+					if(!comprobarLicencia(opcion, conductor))
+					{
+						JOptionPane.showMessageDialog(null, "La licencia no permite conducir este vehiculo");
+					}
+				} 
+				while (!comprobarLicencia(opcion, conductor));
+				usuariosAux.add(conductor);
+			}
+			else
+			{
+				usuariosAux.remove(0);
+			}
 		}
 	}
 	
 	/**
 	 * Funcion para comprobar la licencia
 	 * @param opcion
-	 * @param titular
+	 * @param conductor
 	 * @return
 	 */
-	public static boolean comprobarLicencia(String opcion, Titular titular) 
+	public static boolean comprobarLicencia(String opcion, Conductor conductor) 
 	{
-		if(opcion.equalsIgnoreCase("camion") && titular.getLicencia().equalsIgnoreCase("C"))
+		if(opcion.equalsIgnoreCase("camion") && conductor.getLicencia().equalsIgnoreCase("C"))
 		{
 			return true;
 		}
-		else if(opcion.equalsIgnoreCase("coche") && titular.getLicencia().equalsIgnoreCase("B"))
+		else if(opcion.equalsIgnoreCase("coche") && conductor.getLicencia().equalsIgnoreCase("B"))
 		{
 			return true;
 		}
-		else if(opcion.equalsIgnoreCase("moto") && titular.getLicencia().equalsIgnoreCase("A"))
+		else if(opcion.equalsIgnoreCase("moto") && conductor.getLicencia().equalsIgnoreCase("A"))
 		{
 			return true;
 		}
@@ -230,10 +334,10 @@ public class MainApp {
 	}
 	
 	/**
-	 * Funcion para crear usuario
+	 * Funcion para crear titular
 	 * @return
 	 */
-	public static Titular crearUsuario()
+	public static Titular crearTitular()
 	{
 		String nombre = JOptionPane.showInputDialog("Introduzca nombre de Usuario.");
 		String apellidos = JOptionPane.showInputDialog("Introduzca apellidos del Usuario.");
@@ -255,5 +359,22 @@ public class MainApp {
 		}
 		
 		return new Titular(nombre, apellidos, fecha_nacimiento, licencia, id_licencia, licencia, nombre+" "+apellidos, fecha_caducidad, seguro, garagePropio);
+	}
+	
+	/**
+	 * Funcion para crear conductor
+	 * @return
+	 */
+	public static Conductor crearConductor()
+	{
+		String nombre = JOptionPane.showInputDialog("Introduzca nombre de Usuario.");
+		String apellidos = JOptionPane.showInputDialog("Introduzca apellidos del Usuario.");
+		String fecha_nacimiento = JOptionPane.showInputDialog("Introduzca fecha de nacimiento del Usuario.");
+		String licencia = JOptionPane.showInputDialog("Indique cual de las 3 licencias tiene(A,B o C): \n\nA. Moto\nB. Coche\nC. Camion");
+		int id_licencia = Integer.parseInt(JOptionPane.showInputDialog("Introduzca ID de la licencia."));
+		String fecha_caducidad = JOptionPane.showInputDialog("Introduzca fecha de caducidad de la licencia.");
+
+		
+		return new Conductor(nombre, apellidos, fecha_nacimiento, licencia, id_licencia, licencia, nombre+" "+apellidos, fecha_caducidad);
 	}
 }
