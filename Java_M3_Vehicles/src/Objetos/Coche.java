@@ -10,12 +10,16 @@ public class Coche extends Vehiculo {
 
 	//Atributos
 	
-	protected int ruedasDelanteras[];
-	protected int ruedasTraseras[];
+	private Rueda[] ruedasDelanteras;
+	private Rueda[] ruedasTraseras;
 	
 	//Constructor
 	
-	public Coche(String matricula, String marca, String color, int ruedasDelanteras[], int ruedasTraseras[]) {
+	public Coche(String matricula, String marca, String color) {
+		super(matricula, marca, color);
+	}
+	
+	public Coche(String matricula, String marca, String color, Rueda[] ruedasDelanteras, Rueda[] ruedasTraseras) {
 		super(matricula, marca, color);
 		this.ruedasDelanteras = ruedasDelanteras;
 		this.ruedasTraseras = ruedasTraseras;
@@ -23,27 +27,30 @@ public class Coche extends Vehiculo {
 
 	//Getters y Setters
 	
-	public int[] getRuedasDelanteras() {
+	public Rueda[] getRuedasDelanteras() {
 		return ruedasDelanteras;
 	}
 
-	public void setRuedasDelanteras(int[] ruedasDelanteras) {
+	public void setRuedasDelanteras(Rueda[] ruedasDelanteras) {
 		this.ruedasDelanteras = ruedasDelanteras;
 	}
 
-	public int[] getRuedasTraseras() {
+	public Rueda[] getRuedasTraseras() {
 		return ruedasTraseras;
 	}
 
-	public void setRuedasTraseras(int[] ruedasTraseras) {
+	public void setRuedasTraseras(Rueda[] ruedasTraseras) {
 		this.ruedasTraseras = ruedasTraseras;
+	}
+
+	@Override
+	public String toString() {
+		return "Coche [ruedasDelanteras=" + Arrays.toString(ruedasDelanteras) + ", ruedasTraseras="
+				+ Arrays.toString(ruedasTraseras) + ", matricula=" + matricula + ", marca=" + marca + ", color=" + color
+				+ "]";
 	}
 
 	//Método toString
 	
-	@Override
-	public String toString() {
-		return "Coche [ruedasDelanteras=" + Arrays.toString(ruedasDelanteras) + ", ruedasTraseras="
-				+ Arrays.toString(ruedasTraseras) + "]";
-	}
+	
 }
