@@ -40,13 +40,11 @@ public class Moto extends Vehiculo {
 			this.ruedasTrasera = ruedasTrasera;
 		}
 
+		//Método toString
+		
 		@Override
 		public String toString() {
 			return "Moto [ruedasDelanteras=" + ruedasDelantera + ", ruedasTraseras=" + ruedasTrasera + ", matricula="
 					+ matricula + ", marca=" + marca + ", color=" + color + "]";
 		}
-
-		//Método toString
-		
-		
 }
