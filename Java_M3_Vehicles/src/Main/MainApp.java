@@ -22,7 +22,13 @@ public class MainApp {
 		for (int i = 0; i < ruedasDelanteras.length; i++) 
 		{
 			String marcaRueda = JOptionPane.showInputDialog("Intoduce la marca de la rueda " + (i + 1) + ".");
-			double diametroRueda = Double.parseDouble(JOptionPane.showInputDialog("Intoduce el diametro de la rueda " + (i + 1) + "."));
+			double diametroRueda;
+			do {
+				diametroRueda = Double.parseDouble(JOptionPane.showInputDialog("Intoduce el diametro de la rueda " + (i + 1) + "."));
+				if(diametroRueda < 0.4 || diametroRueda > 4) {
+					System.out.println("Tiene que ser inferior a 4 o superior a 0.4");
+				}
+			} while (diametroRueda < 0.4 || diametroRueda > 4);
 			
 			ruedasDelanteras[i] = new Rueda(diametroRueda, marcaRueda);
 		}
@@ -30,7 +36,13 @@ public class MainApp {
 		for (int i = 0; i < ruedasTraseras.length; i++) 
 		{
 			String marcaRueda = JOptionPane.showInputDialog("Intoduce la marca de la rueda " + (i + 1) + ".");
-			double diametroRueda = Double.parseDouble(JOptionPane.showInputDialog("Intoduce el diametro de la rueda " + (i + 1) + "."));
+			double diametroRueda;
+			do {
+				diametroRueda = Double.parseDouble(JOptionPane.showInputDialog("Intoduce el diametro de la rueda " + (i + 1) + "."));
+				if(diametroRueda < 0.4 || diametroRueda > 4) {
+					System.out.println("Tiene que ser inferior a 4 o superior a 0.4");
+				}
+			} while (diametroRueda < 0.4 || diametroRueda > 4);
 			
 			ruedasTraseras[i] = new Rueda(diametroRueda, marcaRueda);
 		}
