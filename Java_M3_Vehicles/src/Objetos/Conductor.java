@@ -8,10 +8,10 @@ public class Conductor extends Persona {
 	
 		//Atributos
 	
-		private int id;
-		private String tipo_licencia;
-		private String nombre_completo;
-		private String fecha_caducidad;
+		protected int id;
+		protected String tipo_licencia;
+		protected String nombre_completo;
+		protected String fecha_caducidad;
 		
 		//Constructores
 		
