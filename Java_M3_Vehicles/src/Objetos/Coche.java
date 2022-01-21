@@ -13,7 +13,7 @@ public class Coche extends Vehiculo {
 	private Rueda[] ruedasDelanteras;
 	private Rueda[] ruedasTraseras;
 	
-	//Constructor
+	//Constructores
 	
 	public Coche(String matricula, String marca, String color) {
 		super(matricula, marca, color);
