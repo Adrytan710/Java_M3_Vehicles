@@ -32,20 +32,14 @@ public class MainApp {
 		
 		switch (opcion) 
 		{
-			case "Coche":
-					Rueda[] ruedasDelanterasCoche = new Rueda[2];
-					Rueda[] ruedasTraserasCoche = new Rueda[2];
-					
+			case "Coche":					
 					Coche coche = new Coche(matricula, marca, color);
 					
 					//Pedimos al usuario datos de las ruedas
 					
-					rellenarRuedasDelanteras(ruedasDelanterasCoche);
-					rellenarRuedasTraseras(ruedasTraserasCoche);
-					
 					//Insertamos ruedas
-					coche.setRuedasDelanteras(ruedasDelanterasCoche);
-					coche.setRuedasTraseras(ruedasTraserasCoche);
+					coche.setRuedasDelanteras(rellenarRuedasDelanteras());
+					coche.setRuedasTraseras(rellenarRuedasTraseras());
 					
 					System.out.println(coche);
 				break;
@@ -59,17 +53,11 @@ public class MainApp {
 					System.out.println(moto);
 				break;
 				
-			case "Camion":
-					Rueda[] ruedasDelanterasCamion = new Rueda[2];
-					Rueda[] ruedasTraserasCamion = new Rueda[2];
-					
+			case "Camion":					
 					Camion camion = new Camion(matricula, marca, color);
 
-					rellenarRuedasDelanteras(ruedasDelanterasCamion);
-					rellenarRuedasTraseras(ruedasTraserasCamion);
-
-					camion.setRuedasDelanteras(ruedasDelanterasCamion);
-					camion.setRuedasTraseras(ruedasTraserasCamion);
+					camion.setRuedasDelanteras(rellenarRuedasDelanteras());
+					camion.setRuedasTraseras(rellenarRuedasTraseras());
 					
 					System.out.println(camion);
 				break;
@@ -85,8 +73,9 @@ public class MainApp {
 	 * Funcion para rellenar ruedas delanteras de un coche o camion
 	 * @param ruedasDelanteras
 	 */
-	public static void rellenarRuedasDelanteras(Rueda[] ruedasDelanteras)
+	public static Rueda[] rellenarRuedasDelanteras()
 	{
+		Rueda[] ruedasDelanteras = new Rueda[2];
 		for (int i = 0; i < ruedasDelanteras.length; i++) 
 		{
 			String marcaRueda = JOptionPane.showInputDialog("Intoduce la marca de la rueda " + (i + 1) + ".");
@@ -103,6 +92,7 @@ public class MainApp {
 			
 			ruedasDelanteras[i] = new Rueda(diametroRueda, marcaRueda);
 		}
+		return ruedasDelanteras;
 	}
 
 	
@@ -110,8 +100,9 @@ public class MainApp {
 	 * Funcion para rellenar ruedas traseras de un coche o camion
 	 * @param ruedasDelanteras
 	 */
-	public static void rellenarRuedasTraseras(Rueda[] ruedasTraseras)
+	public static Rueda[] rellenarRuedasTraseras()
 	{
+		Rueda[] ruedasTraseras = new Rueda[2];
 		for (int i = 0; i < ruedasTraseras.length; i++) 
 		{
 			String marcaRueda = JOptionPane.showInputDialog("Intoduce la marca de la rueda " + (i + 1) + ".");
@@ -128,6 +119,7 @@ public class MainApp {
 			
 			ruedasTraseras[i] = new Rueda(diametroRueda, marcaRueda);
 		}
+		return ruedasTraseras;
 	}
 
 	
