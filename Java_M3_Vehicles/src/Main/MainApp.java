@@ -13,7 +13,7 @@ public class MainApp {
 	public static void main(String[] args) {
 		
 		//Pedimos al usuario si quiere crear coche o moto
-		String opcion = JOptionPane.showInputDialog("Escoge que vehiculo quieres introducir: \n\n- Coche \n- Moto");
+		String opcion = JOptionPane.showInputDialog("Escoge que vehiculo quieres introducir: \n\n- Coche \n- Moto \n- Camion");
 
 		//Pedimos al usuario datos del vehiculo
 		String matricula;
@@ -33,19 +33,19 @@ public class MainApp {
 		switch (opcion) 
 		{
 			case "Coche":
-					Rueda[] ruedasDelanteras = new Rueda[2];
-					Rueda[] ruedasTraseras = new Rueda[2];
+					Rueda[] ruedasDelanterasCoche = new Rueda[2];
+					Rueda[] ruedasTraserasCoche = new Rueda[2];
 					
 					Coche coche = new Coche(matricula, marca, color);
 					
 					//Pedimos al usuario datos de las ruedas
 					
-					rellenarRuedasDelanteras(ruedasDelanteras);
-					rellenarRuedasTraseras(ruedasTraseras);
+					rellenarRuedasDelanteras(ruedasDelanterasCoche);
+					rellenarRuedasTraseras(ruedasTraserasCoche);
 					
 					//Insertamos ruedas
-					coche.setRuedasDelanteras(ruedasDelanteras);
-					coche.setRuedasTraseras(ruedasTraseras);
+					coche.setRuedasDelanteras(ruedasDelanterasCoche);
+					coche.setRuedasTraseras(ruedasTraserasCoche);
 					
 					System.out.println(coche);
 				break;
@@ -58,15 +58,31 @@ public class MainApp {
 					
 					System.out.println(moto);
 				break;
+				
+			case "Camion":
+					Rueda[] ruedasDelanterasCamion = new Rueda[2];
+					Rueda[] ruedasTraserasCamion = new Rueda[2];
+					
+					Camion camion = new Camion(matricula, marca, color);
+
+					rellenarRuedasDelanteras(ruedasDelanterasCamion);
+					rellenarRuedasTraseras(ruedasTraserasCamion);
+
+					camion.setRuedasDelanteras(ruedasDelanterasCamion);
+					camion.setRuedasTraseras(ruedasTraserasCamion);
+					
+					System.out.println(camion);
+				break;
 	
 			default:
+				JOptionPane.showMessageDialog(null, "La opcion no es valida");
 				break;
 		}
 
 	}
 	
 	/**
-	 * Funcion para rellenar ruedas delanteras de un coche
+	 * Funcion para rellenar ruedas delanteras de un coche o camion
 	 * @param ruedasDelanteras
 	 */
 	public static void rellenarRuedasDelanteras(Rueda[] ruedasDelanteras)
@@ -91,7 +107,7 @@ public class MainApp {
 
 	
 	/**
-	 * Funcion para rellenar ruedas traseras de un coche
+	 * Funcion para rellenar ruedas traseras de un coche o camion
 	 * @param ruedasDelanteras
 	 */
 	public static void rellenarRuedasTraseras(Rueda[] ruedasTraseras)
